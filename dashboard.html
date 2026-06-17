@@ -1,110 +1,265 @@
+```html
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Dashboard</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>LeadFlow CRM Dashboard</title>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<div class="cursor"></div>
+<div class="cursor-dot"></div>
 
-<div class="navbar">
+<div class="animated-bg"></div>
 
-<h2>LeadFlow CRM</h2>
+<!-- Sidebar -->
+<div class="sidebar glass">
 
-<button onclick="logout()">Logout</button>
+    <div class="logo">
+        🚀 LeadFlow
+    </div>
+
+   <a onclick="showSection('dashboard')">📊 Dashboard</a>
+<a onclick="showSection('leads')">👥 Leads</a>
+<a onclick="showSection('analytics')">📈 Analytics</a>
+<a onclick="showSection('settings')">⚙ Settings</a>
+</div>
+
+<!-- Main -->
+<div class="main">
+
+    <!-- Topbar -->
+    <div class="topbar glass">
+
+        <h2>Welcome Back, Admin 👋</h2>
+
+        <div class="top-actions">
+
+            <div class="clock" id="clock"></div>
+
+            <button id="themeToggle">
+                🌙
+            </button>
+
+            <div class="notification">
+                🔔
+                <span>3</span>
+            </div>
+
+            <button onclick="logout()">
+                Logout
+            </button>
+
+        </div>
+
+    </div>
+
+    <!-- Welcome Banner -->
+    <div class="welcome-banner glass">
+        <h1>LeadFlow CRM</h1>
+        <p>
+            Manage Leads, Track Conversions,
+            Grow Your Business.
+        </p>
+    </div>
+    <div class="quick-actions glass">
+
+<button>Add Lead</button>
+
+<button>Generate Report</button>
+
+<button>Schedule Meeting</button>
+
+<button>Send Email</button>
 
 </div>
 
+    <!-- Stats -->
+    <div class="dashboard">
 
-<div class="dashboard">
+        <div class="card glass">
+            <h3>Total Leads</h3>
+            <h1 class="counter" data-target="120">0</h1>
+            <p>+12% this week</p>
+        </div>
 
-<div class="card">
-<h3>Total Leads</h3>
-<h1>120</h1>
+        <div class="card glass">
+            <h3>New Leads</h3>
+            <h1 class="counter" data-target="50">0</h1>
+            <p>Fresh inquiries</p>
+        </div>
+
+        <div class="card glass">
+            <h3>Contacted</h3>
+            <h1 class="counter" data-target="40">0</h1>
+            <p>Follow-ups done</p>
+        </div>
+
+        <div class="card glass">
+            <h3>Converted</h3>
+            <h1 class="counter" data-target="30">0</h1>
+            <p>Successful deals</p>
+            <div class="card glass">
+<h3>Total Revenue</h3>
+<h1>$25,400</h1>
+<p>This Month</p>
+</div>
+        </div>
+
+    </div>
+
+    <!-- Progress -->
+    <div class="progress-card glass">
+
+        <h3>Monthly Target</h3>
+
+        <div class="progress">
+            <div class="progress-fill"></div>
+        </div>
+
+        <p>75% Goal Completed</p>
+
+    </div>
+
+    <!-- Grid -->
+    <div class="grid">
+
+        <!-- Lead Management -->
+        <div class="table-container glass">
+
+            <h2>Lead Management</h2>
+
+            <input
+            id="search"
+            placeholder="Search Leads..."
+            onkeyup="searchLead()">
+
+            <table id="leadTable">
+
+                <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Status</th>
+                </tr>
+
+                <tr>
+                    <td>John Doe</td>
+                    <td>john@gmail.com</td>
+                    <td>
+                        <span class="badge high">
+                            High
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Alex Smith</td>
+                    <td>alex@gmail.com</td>
+                    <td>
+                        <span class="badge medium">
+                            Medium
+                        </span>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>David Lee</td>
+                    <td>david@gmail.com</td>
+                    <td>
+                        <span class="badge low">
+                            Low
+                        </span>
+                    </td>
+                </tr>
+
+            </table>
+
+        </div>
+
+        <!-- Activity -->
+        <div class="activity glass">
+
+            <h2>Recent Activity</h2>
+
+            <ul>
+
+                <li>✔ New Lead Added</li>
+                <li>✔ Report Generated</li>
+                <li>✔ Client Contacted</li>
+                <li>✔ Lead Converted</li>
+
+            </ul>
+            <div class="activity glass">
+
+<h2>AI Suggestions</h2>
+
+<ul>
+
+<li>Follow up with John Doe</li>
+
+<li>Schedule Demo Meeting</li>
+
+<li>Revenue increased 12%</li>
+
+</ul>
+
 </div>
 
-<div class="card">
-<h3>New</h3>
-<h1>50</h1>
+        </div>
+
+    </div>
+
+    <!-- Add Lead -->
+    <div class="add-lead glass">
+
+        <h2>Add New Lead</h2>
+
+        <input type="text" placeholder="Lead Name">
+
+        <input type="email" placeholder="Email">
+
+        <input type="text" placeholder="Company">
+
+        <button>
+            Add Lead
+        </button>
+
+    </div>
+
+    <!-- Chart -->
+    <div class="chart-box glass">
+
+        <h2>Lead Analytics</h2>
+
+        <canvas id="leadChart"></canvas>
+
+    </div>
+
+</div>
+<div class="card glass">
+   <h3>Total Revenue</h3>
+   <h1>$25,400</h1>
 </div>
 
-<div class="card">
-<h3>Contacted</h3>
-<h1>40</h1>
-</div>
-
-<div class="card">
-<h3>Converted</h3>
-<h1>30</h1>
-</div>
-
-</div>
-
-
-<div class="table-container">
-
-<h2>Lead Management</h2>
-
-<input
-id="search"
-placeholder="Search Lead..."
-onkeyup="searchLead()"
-/>
-
-<table id="leadTable">
-
-<tr>
-<th>Name</th>
-<th>Email</th>
-<th>Status</th>
-</tr>
-
-<tr>
-<td>John</td>
-<td>john@gmail.com</td>
-<td>
-<select>
-<option>New</option>
-<option>Contacted</option>
-<option>Converted</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>Alex</td>
-<td>alex@gmail.com</td>
-<td>
-<select>
-<option>Contacted</option>
-<option>New</option>
-<option>Converted</option>
-</select>
-</td>
-</tr>
-
-<tr>
-<td>David</td>
-<td>david@gmail.com</td>
-<td>
-<select>
-<option>Converted</option>
-<option>New</option>
-<option>Contacted</option>
-</select>
-</td>
-</tr>
-
-</table>
-
+<div class="card glass">
+   <h3>CRM Health</h3>
+   <h1>92%</h1>
 </div>
 
 <script src="script.js"></script>
+<script src="cursor.js"></script>
+<script src="effects.js"></script>
+<script src="charts.js"></script>
+<script src="notifications.js"></script>
 
 </body>
 </html>
